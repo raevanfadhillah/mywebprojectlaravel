@@ -1,0 +1,45 @@
+@extends('layouts.app')
+
+@section('title', 'Register - Portfolio & BookStore')
+
+@section('content')
+<div class="custom-card" style="max-width: 28rem; margin: 2rem auto; padding: 2.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #1e293b; margin-bottom: 0.5rem; text-align: center;">Buat Akun Baru</h2>
+    <p style="color: #64748b; text-align: center; font-size: 0.9rem; margin-bottom: 1.5rem;">Daftar untuk mengakses katalog buku.</p>
+
+    @if ($errors->any())
+    <div style="background-color: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; padding: 0.75rem; border-radius: 8px; margin-bottom: 1.25rem; font-size: 0.85rem;">
+        <ul style="margin-left: 1rem;">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form action="/register" method="POST">
+        @csrf
+        <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" name="name" class="form-input" value="{{ old('name') }}" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Alamat Email</label>
+            <input type="email" name="email" class="form-input" value="{{ old('email') }}" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Konfirmasi Password</label>
+            <input type="password" name="password_confirmation" class="form-input" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; text-align: center; border: none; cursor: pointer; margin-top: 0.5rem;">Daftar Sekarang</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;">
+        Sudah punya akun? <a href="/login" style="color: #2563eb; font-weight: 600; text-decoration: none;">Login di sini</a>
+    </p>
+</div>
+@endsection
